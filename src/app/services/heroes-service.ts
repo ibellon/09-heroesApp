@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HeroeModel } from '../models/heroe.model';
 
 import { map } from 'rxjs/operators';
+import { ObjectUnsubscribedError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,25 @@ export class HeroesService {
     delete heroeTemp.id;
 
     return this.http.put(this.url+"/heroes/"+heroe.id+".json", heroeTemp);
+  }
+
+  getHeroes() {
+    return this.http.get(this.url+"/heroes.json")
+      .pipe(
+        map(response => this.crearObjeto(response))
+      );
+  }
+
+  private crearObjeto(heroesObject: any) {
+
+    const heroes: HeroeModel[] = [];
+
+    Object.keys(heroesObject).forEach(key => {
+      const heroe: HeroeModel = heroesObject[key];
+      heroe.id = key;
+      heroes.push(heroe);
+    });
+
+    return heroes;
   }
 }
