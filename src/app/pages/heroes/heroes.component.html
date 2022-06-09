@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="col text-right">
-        <button class="btn btn-primary" [routerLink]="['/heroe/1']" routerLinkActive="active" >
+        <button class="btn btn-primary" [routerLink]="['/heroe/nuevo']" routerLinkActive="active" >
             <i class="fa fa-plus">
                 Agregar
             </i>
@@ -31,7 +31,15 @@
             <label *ngIf="heroe.vivo" class="badge badge-success">Vivo</label>
             <label *ngIf="!heroe.vivo" class="badge badge-danger">Muerto</label>
         </td>
-        <td>@mdo</td>
+        <td>
+          <button class="btn btn-info mr-1"
+          [routerLink]="['/heroe', heroe.id]"  routerLinkActive="active">
+              <i class="fa fa-pen"></i>
+          </button>
+          <button class="btn btn-danger">
+              <i class="fa fa-trash"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

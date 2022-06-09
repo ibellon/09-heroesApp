@@ -43,6 +43,10 @@ export class HeroesService {
       );
   }
 
+  getHeroe(id: string) {
+    return this.http.get<HeroeModel>(this.url+"/heroes/"+id+".json");
+  }
+
   private crearObjeto(heroesObject: any) {
 
     const heroes: HeroeModel[] = [];
