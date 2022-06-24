@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HeroeModel } from '../models/heroe.model';
 
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { ObjectUnsubscribedError } from 'rxjs';
 
 @Injectable({
@@ -39,7 +39,7 @@ export class HeroesService {
   getHeroes() {
     return this.http.get(this.url+"/heroes.json")
       .pipe(
-        map(response => this.crearObjeto(response))
+        map(response => this.crearObjeto(response)), delay(1500)
       );
   }
 
