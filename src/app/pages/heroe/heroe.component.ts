@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class HeroeComponent implements OnInit {
 
   heroe: HeroeModel = new HeroeModel();
+  isCrear: boolean = false;
 
   constructor(private heroesService: HeroesService,
               private route: ActivatedRoute) { }
@@ -56,13 +57,14 @@ export class HeroeComponent implements OnInit {
     }
     else {
       peticion = this.heroesService.crearHeroe(this.heroe);
+      this.isCrear = true;
     }
 
     peticion.subscribe(response => {
       console.info(response);
       Swal.fire({
         title: 'Espere',
-        text: 'Se actualizó correctamente',
+        text: this.isCrear ? 'Se creó correctamente': 'Se actualizó correctamente',
         icon: 'success'
       });
     });
